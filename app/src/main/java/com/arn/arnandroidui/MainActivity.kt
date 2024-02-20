@@ -43,6 +43,7 @@ import com.arn.arnandroidui.ui.theme.ArnAndroidUITheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setContent { LoginScreen() }
         setContent {
             ArnAndroidUITheme {
                 // A surface container using the 'background' color from the theme
@@ -50,7 +51,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Home()
+                    LoginScreen()
+                   // Home()
                 }
             }
         }
@@ -63,9 +65,9 @@ fun Home(modifier: Modifier = Modifier){
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
-        .fillMaxWidth()
-        .background(color = Color.White)
-        .fillMaxHeight()
+            .fillMaxWidth()
+            .background(color = Color.White)
+            .fillMaxHeight()
     ) {
 
         Column(
@@ -91,7 +93,7 @@ fun Home(modifier: Modifier = Modifier){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly,
                 modifier = modifier
-                    .background(Color.LightGray,RoundedCornerShape(15.dp))
+                    .background(Color.LightGray, RoundedCornerShape(15.dp))
                     .size(400.dp)
 
             ) {
@@ -117,7 +119,7 @@ fun Home(modifier: Modifier = Modifier){
                         .padding(5.dp)
                 ){
                     Text(text = "Lewati",fontWeight = FontWeight.Bold, textAlign = TextAlign.Center,modifier = modifier
-                        .border(1.dp,Color.Blue, RoundedCornerShape(15.dp))
+                        .border(1.dp, Color.Blue, RoundedCornerShape(15.dp))
                         .height(40.dp)
                         .width(150.dp)
                         .wrapContentHeight(align = Alignment.CenterVertically)
