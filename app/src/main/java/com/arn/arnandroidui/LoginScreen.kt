@@ -36,7 +36,7 @@ import androidx.core.graphics.toColorInt
 import com.arn.arnandroidui.ui.theme.ArnAndroidUITheme
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier,textNip:TextFieldValue = remember { TextFieldValue() },textPassword:TextFieldValue = remember { TextFieldValue() }){
+fun LoginScreen(modifier: Modifier = Modifier){
     val textNip = remember { mutableStateOf(TextFieldValue()) }
     val textPassword = remember { mutableStateOf(TextFieldValue()) }
 
