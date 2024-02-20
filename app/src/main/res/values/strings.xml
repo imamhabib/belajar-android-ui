@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">ArnAndroidUI</string>
+    <string name="label_logo_atas">Logo HSI Sakinah atas</string>
+    <string name="label_logo_faq">Logo FAQ</string>
+    <string name="label_textfield_nip">NIP</string>
+    <string name="label_textfield_password">Password</string>
+    <string name="label_button_login">Login</string>
+    <string name="text_no_access">Belum bisa akses?</string>
+    <string name="text_cs_ikhwan">Hubungi Cs Ikhwan</string>
+    <string name="text_cs_akhwat">Hubungi Cs Akhwat</string>
+    <string name="text_faq">Lihat FAQ</string>
+    <string name="toast_ikhwan">Menghubungi CS Ikhwan...</string>
+    <string name="toast_akhwat">Menghubungi CS Akhwat...</string>
+    <string name="toast_login_nip_false">NIP harus diisi</string>
+    <string name="toast_login_password_false">Password harus diisi</string>
+    <string name="toast_login_true">Menuju halaman beranda...</string>
+    <string name="toast_faq">Menuju halaman FAQ...</string>
+
 </resources>
