@@ -1,5 +1,6 @@
 package com.arn.arnandroidui
 
+import android.content.Context
 import android.content.res.Resources
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
@@ -13,7 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
@@ -21,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionContext
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,6 +44,7 @@ import com.arn.arnandroidui.ui.theme.ArnAndroidUITheme
 fun LoginScreen(modifier: Modifier = Modifier){
     val textNip = remember { mutableStateOf(TextFieldValue()) }
     val textPassword = remember { mutableStateOf(TextFieldValue()) }
+    val state = rememberScrollState()
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -46,12 +52,14 @@ fun LoginScreen(modifier: Modifier = Modifier){
             .fillMaxWidth()
             .background(color = Color.White)
             .fillMaxHeight()
+            .verticalScroll(state)
     ) {
 
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(5.dp),
+                .padding(5.dp)
+
         ) {
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -60,11 +68,12 @@ fun LoginScreen(modifier: Modifier = Modifier){
             ) {
                 Image(
                     painter = painterResource(R.drawable.hsi_sakinah),
-                    contentDescription = Resources.getSystem().getString(R.string.label_logo_atas),
+                    contentDescription = stringResource(R.string.label_logo_atas),
                     modifier = modifier
                         .padding(5.dp)
                         .size(100.dp)
                 )
+
             }
 
             Column(
@@ -74,7 +83,8 @@ fun LoginScreen(modifier: Modifier = Modifier){
 
                 Text(
                     modifier = Modifier.padding(start = 19.dp, end = 19.dp),
-                    text = Resources.getSystem().getString(R.string.label_textfield_nip))
+                    text = stringResource(R.string.label_textfield_nip)
+                )
                 Row(
 
                 ){
@@ -92,7 +102,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
 
                 Text(
                     modifier = Modifier.padding(start = 19.dp, end = 19.dp),
-                    text = Resources.getSystem().getString(R.string.label_textfield_password)
+                    text = stringResource(R.string.label_textfield_password)
                 )
                 Row(
 
@@ -114,7 +124,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
                 ){
                     val context = LocalContext.current
                     Button(
-                        onClick = { Toast.makeText(context,validateData(textNip.value,textPassword.value),Toast.LENGTH_SHORT).show() },
+                        onClick = { Toast.makeText(context,validateData(context,textNip.value,textPassword.value),Toast.LENGTH_SHORT).show() },
                         modifier = Modifier
                             .padding(start = 19.dp, end = 19.dp, bottom = 16.dp)
                             .weight(1f)
@@ -122,7 +132,7 @@ fun LoginScreen(modifier: Modifier = Modifier){
                         shape = RoundedCornerShape(35),
                         colors = ButtonDefaults.buttonColors(containerColor = Color("#40A2E3".toColorInt()))
                     ){
-                        Text(Resources.getSystem().getString(R.string.label_button_login))
+                        Text(stringResource(R.string.label_button_login))
                     }
                 }
             }
@@ -132,25 +142,26 @@ fun LoginScreen(modifier: Modifier = Modifier){
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = Resources.getSystem().getString(R.string.text_no_access))
+                Text(text = stringResource(R.string.text_no_access))
 
                 val context = LocalContext.current
+                val toastIkhwan = stringResource(R.string.toast_ikhwan)
                 TextButton(
-                    onClick = { Toast.makeText(context,Resources.getSystem().getString(R.string.toast_ikhwan),Toast.LENGTH_SHORT).show() },
+                    onClick = { Toast.makeText(context, toastIkhwan,Toast.LENGTH_SHORT).show() },
                     modifier = Modifier.padding(start = 19.dp, end = 19.dp),
                 ){
-                    Text(text = Resources.getSystem().getString(R.string.text_cs_ikhwan), color = Color("#40A2E3".toColorInt()))
+                    Text(text = stringResource(R.string.text_cs_ikhwan), color = Color("#40A2E3".toColorInt()))
                 }
 
+                val toastAkhwat = stringResource(R.string.toast_akhwat)
                 TextButton(
-                    onClick = { Toast.makeText(context,Resources.getSystem().getString(R.string.toast_akhwat),Toast.LENGTH_SHORT).show() },
+                    onClick = { Toast.makeText(context, toastAkhwat,Toast.LENGTH_SHORT).show() },
                     modifier = Modifier.padding(start = 19.dp, end = 19.dp),
                 ){
-                    Text(text = Resources.getSystem().getString(R.string.text_cs_akhwat), color = Color("#40A2E3".toColorInt()))
+                    Text(text = stringResource(R.string.text_cs_akhwat), color = Color("#40A2E3".toColorInt()))
                 }
             }
         }
-
 
         Row(
             modifier = modifier
@@ -160,8 +171,9 @@ fun LoginScreen(modifier: Modifier = Modifier){
             horizontalArrangement = Arrangement.Center
         ){
             val context = LocalContext.current
+            val  toastFaq = stringResource((R.string.text_faq))
             OutlinedButton(
-                onClick = { Toast.makeText(context,Resources.getSystem().getString(R.string.text_faq),Toast.LENGTH_SHORT).show() },
+                onClick = { Toast.makeText(context,toastFaq,Toast.LENGTH_SHORT).show() },
                 modifier = Modifier
                     .padding(start = 19.dp, end = 19.dp, bottom = 16.dp)
                     .height(50.dp)
@@ -172,10 +184,10 @@ fun LoginScreen(modifier: Modifier = Modifier){
                 Row(
                     horizontalArrangement = Arrangement.Center
                 ){
-                    Text(color = Color("#40A2E3".toColorInt()), text = Resources.getSystem().getString(R.string.text_faq))
+                    Text(color = Color("#40A2E3".toColorInt()), text = stringResource(R.string.text_faq))
                     Image(
                         painter = painterResource(R.drawable.baseline_open_in_new_24),
-                        contentDescription = Resources.getSystem().getString(R.string.label_logo_faq),
+                        contentDescription = stringResource(R.string.label_logo_faq),
                         modifier = modifier
                             .size(20.dp)
                     )
@@ -186,15 +198,15 @@ fun LoginScreen(modifier: Modifier = Modifier){
     }
 }
 
-fun validateData(textNip: TextFieldValue, textPassword: TextFieldValue):String {
+fun validateData(context: Context,textNip: TextFieldValue, textPassword: TextFieldValue):String {
     var textToast:String = ""
 
     if(textNip.text.isEmpty()){
-        textToast = Resources.getSystem().getString(R.string.toast_login_nip_false)
+        textToast = context.getString (R.string.toast_login_nip_false)
     }else if(textPassword.text.isEmpty()){
-        textToast = Resources.getSystem().getString(R.string.toast_login_password_false)
+        textToast = context.getString(R.string.toast_login_password_false)
     }else{
-        textToast = Resources.getSystem().getString(R.string.toast_login_true)
+        textToast = context.getString(R.string.toast_login_true)
     }
 
 
